@@ -10,10 +10,12 @@ motor2_pins = (21, 23, 27, 29)
 # GPIO setup
 GPIO.setmode(GPIO.BOARD)
 for pin in motor1_pins:
+    print(pin)
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, 0)
 
 for pin in motor2_pins:
+    print(pin)
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, 0)
 

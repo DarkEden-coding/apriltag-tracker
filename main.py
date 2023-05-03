@@ -1,71 +1,23 @@
-# move 2 stepper motors
-
+from rpimotorlib import Motor
 import time
-import RPi.GPIO as GPIO
 
-# GPIO pins for the 2 motors
+# Define motor pins
 motor1_pins = (6, 13, 19, 26)
 motor2_pins = (9, 11, 0, 5)
 
-# GPIO setup
-GPIO.setmode(GPIO.BCM)
-for pin in motor1_pins:
-    print(pin)
-    GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, 0)
+# Create Motor objects
+motor1 = Motor(motor1_pins)
+motor2 = Motor(motor2_pins)
 
-for pin in motor2_pins:
-    print(pin)
-    GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, 0)
+# Move both motors 90 degrees back and forth
+for i in range(2):
+    motor1.move_steps(2000, direction='backward')
+    motor2.move_steps(2000, direction='backward')
+    time.sleep(1)
+    motor1.move_steps(2000, direction='forward')
+    motor2.move_steps(2000, direction='forward')
+    time.sleep(1)
 
-
-# motor1
-def motor1(direction, steps):
-    step = 0
-    while step < steps:
-        for pin in range(0, 4):
-            GPIO.output(motor1_pins[pin], direction[step][pin])
-        step += 1
-        time.sleep(0.001)
-
-
-# motor2
-def motor2(direction, steps):
-    step = 0
-    while step < steps:
-        for pin in range(0, 4):
-            GPIO.output(motor2_pins[pin], direction[step][pin])
-        step += 1
-        time.sleep(0.001)
-
-
-# clockwise
-clockwise = [
-    [1, 0, 0, 0],
-    [1, 1, 0, 0],
-    [0, 1, 0, 0],
-    [0, 1, 1, 0],
-    [0, 0, 1, 0],
-    [0, 0, 1, 1],
-    [0, 0, 0, 1],
-    [1, 0, 0, 1],
-]
-
-# counterclockwise
-counter_clockwise = [
-    [1, 0, 0, 1],
-    [0, 0, 0, 1],
-    [0, 0, 1, 1],
-    [0, 0, 1, 0],
-    [0, 1, 1, 0],
-    [0, 1, 0, 0],
-    [1, 1, 0, 0],
-    [1, 0, 0, 0],
-]
-
-# move motor1 clockwise 2048 steps
-motor1(clockwise, 2048)
-
-# move motor2 counterclockwise 2048 steps
-motor2(counter_clockwise, 2048)
+# Cleanup motors
+motor1.cleanup()
+motor2.cleanup()

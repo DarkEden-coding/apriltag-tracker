@@ -13,7 +13,7 @@ def main():
     # Arguments  for motor run function
     # (GPIOPins, stepdelay, steps, counterclockwise, verbose, steptype, initdelay)
 
-    for i in range(500):
+    for i in range(10):
         if i % 2 == 0:
             time.sleep(0.1)
             mymotortest.motor_run(GpioPins, 0.05, 128, True, True, "full", 0.05)

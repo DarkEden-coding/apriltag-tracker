@@ -1,23 +1,33 @@
-from RpiMotorLib import Motor
+from RpiMotorLib import RpiMotorLib
 import time
+import RPi.GPIO as GPIO
 
-# Define motor pins
-motor1_pins = (6, 13, 19, 26)
+# Declare an named instance of class pass your custom name and type of motor
+mymotortest = RpiMotorLib.BYJMotor("MyMotorOne", "28BYJ")
 motor2_pins = (9, 11, 0, 5)
 
-# Create Motor objects
-motor1 = Motor(motor1_pins)
-motor2 = Motor(motor2_pins)
 
-# Move both motors 90 degrees back and forth
-for i in range(2):
-    motor1.move_steps(2000, direction='backward')
-    motor2.move_steps(2000, direction='backward')
-    time.sleep(1)
-    motor1.move_steps(2000, direction='forward')
-    motor2.move_steps(2000, direction='forward')
-    time.sleep(1)
+def main():
+    GpioPins = [6, 13, 19, 26]
 
-# Cleanup motors
-motor1.cleanup()
-motor2.cleanup()
+    # Arguments  for motor run function
+    # (GPIOPins, stepdelay, steps, counterclockwise, verbose, steptype, initdelay)
+
+    for i in range(500):
+        if i % 2 == 0:
+            time.sleep(0.1)
+            mymotortest.motor_run(GpioPins, 0.05, 128, True, True, "full", 0.05)
+        else:
+            time.sleep(0.1)
+            mymotortest.motor_run(GpioPins, 0.05, 128, False, True, "full", 0.05)
+
+
+# ===================MAIN===============================
+
+if __name__ == "__main__":
+    print("START")
+    main()
+    GPIO.cleanup()  # Optional
+    exit()
+
+# =====================END===============================

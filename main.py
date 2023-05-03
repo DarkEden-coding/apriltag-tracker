@@ -1,34 +1,55 @@
-from RpiMotorLib import RpiMotorLib
-import time
 import RPi.GPIO as GPIO
+import time
 
-# Declare an named instance of class pass your custom name and type of motor
-mymotortest = RpiMotorLib.BYJMotor("MyMotorOne", "28BYJ")
-motor2_pins = (9, 11, 0, 5)
+# Define the motor pin numbers
+IN1 = 26
+IN2 = 19
+IN3 = 13
+IN4 = 6
+
+# Set up the GPIO pins
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(IN1, GPIO.OUT)
+GPIO.setup(IN2, GPIO.OUT)
+GPIO.setup(IN3, GPIO.OUT)
+GPIO.setup(IN4, GPIO.OUT)
+
+# Define the sequence of steps
+# Each row represents a step, and the columns are the IN1-IN4 pin states
+# This sequence will rotate the motor clockwise
+sequence = [[1, 0, 0, 1],
+            [1, 0, 0, 0],
+            [1, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 1],
+            [0, 0, 0, 1]]
 
 
-def main():
-    GpioPins = [26, 19, 13, 6]
+# Define a function to move the motor a specified number of steps in a given direction
+def move_motor(steps, direction):
+    for i in range(steps):
+        for step in range(8):
+            # Set the motor pins according to the current step in the sequence
+            GPIO.output(IN1, sequence[step][0])
+            GPIO.output(IN2, sequence[step][1])
+            GPIO.output(IN3, sequence[step][2])
+            GPIO.output(IN4, sequence[step][3])
+            # Wait a short amount of time between each step
+            time.sleep(0.001)
+        # Reverse the sequence if moving backwards
+        if direction == 'backward':
+            sequence.reverse()
 
-    # Arguments  for motor run function
-    # (GPIOPins, stepdelay, steps, counterclockwise, verbose, steptype, initdelay)
 
-    for i in range(10):
-        if i % 2 == 0:
-            time.sleep(0.1)
-            mymotortest.motor_run(GpioPins, 0.05, 128, True, False, "full", 0.05)
-        else:
-            time.sleep(0.1)
-            mymotortest.motor_run(GpioPins, 0.05, 128, False, False, "full", 0.05)
+# Move the motor forward 100 steps
+move_motor(100, 'forward')
+time.sleep(1)
 
+# Move the motor backward 100 steps
+move_motor(100, 'backward')
+time.sleep(1)
 
-# ===================MAIN===============================
-
-if __name__ == "__main__":
-    print("START")
-    GPIO.setmode(GPIO.BCM)
-    main()
-    GPIO.cleanup()  # Optional
-    exit()
-
-# =====================END===============================
+# Clean up the GPIO pins
+GPIO.cleanup()

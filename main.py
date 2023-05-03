@@ -1,4 +1,4 @@
-from RpiMotorLib.RpiMotorLib import Motor
+from RpiMotorLib import Motor
 import time
 
 # Define motor pins

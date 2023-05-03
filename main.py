@@ -8,7 +8,7 @@ motor1_pins = (6, 13, 19, 26)
 motor2_pins = (9, 11, 0, 5)
 
 # GPIO setup
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 for pin in motor1_pins:
     print(pin)
     GPIO.setup(pin, GPIO.OUT)

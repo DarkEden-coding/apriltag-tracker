@@ -9,8 +9,13 @@ motor2_pins = (9, 11, 0, 5)
 
 # GPIO setup
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(motor1_pins, GPIO.OUT)
-GPIO.setup(motor2_pins, GPIO.OUT)
+for pin in motor1_pins:
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, 0)
+
+for pin in motor2_pins:
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, 0)
 
 
 # motor1

@@ -16,10 +16,10 @@ def main():
     for i in range(10):
         if i % 2 == 0:
             time.sleep(0.1)
-            mymotortest.motor_run(GpioPins, 0.05, 128, True, True, "full", 0.05)
+            mymotortest.motor_run(GpioPins, 0.05, 128, True, False, "full", 0.05)
         else:
             time.sleep(0.1)
-            mymotortest.motor_run(GpioPins, 0.05, 128, False, True, "full", 0.05)
+            mymotortest.motor_run(GpioPins, 0.05, 128, False, False, "full", 0.05)
 
 
 # ===================MAIN===============================

@@ -26,6 +26,7 @@ def main():
 
 if __name__ == "__main__":
     print("START")
+    GPIO.setmode(GPIO.BCM)
     main()
     GPIO.cleanup()  # Optional
     exit()

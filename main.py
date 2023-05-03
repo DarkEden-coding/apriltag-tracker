@@ -44,11 +44,11 @@ def move_motor(steps, direction):
 
 
 # Move the motor forward 100 steps
-move_motor(100, 'forward')
+move_motor(2000, 'forward')
 time.sleep(1)
 
 # Move the motor backward 100 steps
-move_motor(100, 'backward')
+move_motor(2000, 'backward')
 time.sleep(1)
 
 # Clean up the GPIO pins

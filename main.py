@@ -8,7 +8,7 @@ motor2_pins = (9, 11, 0, 5)
 
 
 def main():
-    GpioPins = [6, 13, 19, 26]
+    GpioPins = [26, 19, 13, 6]
 
     # Arguments  for motor run function
     # (GPIOPins, stepdelay, steps, counterclockwise, verbose, steptype, initdelay)

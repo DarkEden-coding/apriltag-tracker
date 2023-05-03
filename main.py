@@ -4,8 +4,8 @@ import time
 import RPi.GPIO as GPIO
 
 # GPIO pins for the 2 motors
-motor1_pins = (11, 12, 13, 15)
-motor2_pins = (16, 18, 22, 7)
+motor1_pins = (6, 13, 19, 26)
+motor2_pins = (9, 11, 0, 5)
 
 # GPIO setup
 GPIO.setmode(GPIO.BOARD)

@@ -1,4 +1,4 @@
-from pupil_apriltags import Detector
+import apriltag
 import numpy as np
 
 camera_params = "camera calibration/CameraCalibration.npz"
@@ -13,7 +13,7 @@ aprilCameraMatrix = [
     cameraMatrix[0][2],
     cameraMatrix[1][2],
 ]
-detector = Detector(
+options = apriltag.DetectorOptions(
     families="tag16h5",
     nthreads=3,
     quad_decimate=2.0,
@@ -21,6 +21,7 @@ detector = Detector(
     decode_sharpening=1.0,
     refine_edges=3,
 )
+detector = apriltag.Detector(options)
 
 
 def get_tag(image):

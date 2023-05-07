@@ -14,13 +14,13 @@ aprilCameraMatrix = [
     cameraMatrix[1][2],
 ]
 detector = Detector(
-        families="tag16h5",
-        nthreads=3,
-        quad_decimate=2.0,
-        quad_sigma=3.0,
-        decode_sharpening=1.0,
-        refine_edges=3,
-    )
+    families="tag16h5",
+    nthreads=3,
+    quad_decimate=2.0,
+    quad_sigma=3.0,
+    decode_sharpening=1.0,
+    refine_edges=3,
+)
 
 
 def get_tag(image):

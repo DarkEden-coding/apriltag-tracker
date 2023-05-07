@@ -1,4 +1,4 @@
-from dt_apriltags import Detector
+from pupil_apriltags import Detector
 import numpy as np
 
 camera_params = "camera calibration/CameraCalibration.npz"

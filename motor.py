@@ -57,5 +57,5 @@ class Motor:
     def get_position(self):
         return self.position
 
-    def __del__(self):
-        GPIO.cleanup()
+    def disable(self):
+        GPIO.cleanup((self.IN1, self.IN2, self.IN3, self.IN4))

@@ -21,6 +21,7 @@ options = apriltag.DetectorOptions(
     decode_sharpening=1.0,
     refine_edges=3,
 )
+
 detector = apriltag.Detector()
 
 
